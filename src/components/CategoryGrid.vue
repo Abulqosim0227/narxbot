@@ -4,16 +4,16 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const categories = [
-  { id: 'phones', name: 'Telefonlar', icon: '\uD83D\uDCF1' },
-  { id: 'laptops', name: 'Noutbuklar', icon: '\uD83D\uDCBB' },
-  { id: 'tvs', name: 'Televizorlar', icon: '\uD83D\uDCFA' },
-  { id: 'appliances', name: 'Maishiy texnika', icon: '\uD83C\uDFE0' },
-  { id: 'headphones', name: 'Quloqchinlar', icon: '\uD83C\uDFA7' },
-  { id: 'watches', name: 'Soatlar', icon: '\u231A' },
+  { query: 'telefon', name: 'Telefonlar', icon: '\uD83D\uDCF1' },
+  { query: 'noutbuk', name: 'Noutbuklar', icon: '\uD83D\uDCBB' },
+  { query: 'televizor', name: 'Televizorlar', icon: '\uD83D\uDCFA' },
+  { query: 'konditsioner', name: 'Konditsioner', icon: '\u2744\uFE0F' },
+  { query: 'naushnik', name: 'Quloqchinlar', icon: '\uD83C\uDFA7' },
+  { query: 'soat', name: 'Soatlar', icon: '\u231A' },
 ]
 
-function selectCategory(categoryId: string) {
-  router.push({ name: 'search', query: { q: categoryId } })
+function selectCategory(searchQuery: string) {
+  router.push({ name: 'search', query: { q: searchQuery } })
 }
 </script>
 
@@ -25,7 +25,7 @@ function selectCategory(categoryId: string) {
         v-for="category in categories"
         :key="category.id"
         class="card flex flex-col items-center gap-2 py-4 px-3 active:scale-95 transition-transform"
-        @click="selectCategory(category.id)"
+        @click="selectCategory(category.query)"
       >
         <span class="text-3xl">{{ category.icon }}</span>
         <span class="text-xs font-medium text-gray-600">{{ category.name }}</span>
