@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 const props = defineProps<{
   initialValue?: string
@@ -21,6 +21,12 @@ function handleSubmit() {
 onMounted(() => {
   if (props.initialValue) {
     query.value = props.initialValue
+  }
+})
+
+watch(() => props.initialValue, (newVal) => {
+  if (newVal !== undefined) {
+    query.value = newVal
   }
 })
 </script>

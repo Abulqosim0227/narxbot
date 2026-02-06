@@ -65,6 +65,8 @@ function toggleFavorite() {
 onMounted(async () => {
   try {
     const data = await api.get<Product>(`/products/${route.params.id}`)
+    data.current_price = Number(data.current_price)
+    data.original_price = data.original_price ? Number(data.original_price) : null
     product.value = data
   } catch (e) {
     error.value = true

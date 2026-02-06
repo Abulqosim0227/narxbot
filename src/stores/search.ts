@@ -43,6 +43,21 @@ export const useSearchStore = defineStore('search', () => {
 
     try {
       const data = await api.get<SearchResult>('/search', { params: { q: params.q } })
+      // API returns prices as strings — convert to numbers
+      if (data.products) {
+        data.products = data.products.map(p => ({
+          ...p,
+          current_price: Number(p.current_price),
+          original_price: p.original_price ? Number(p.original_price) : null,
+        }))
+      }
+      if (data.cheapest) {
+        data.cheapest = {
+          ...data.cheapest,
+          current_price: Number(data.cheapest.current_price),
+          original_price: data.cheapest.original_price ? Number(data.cheapest.original_price) : null,
+        }
+      }
       results.value = data
     } catch (e) {
       error.value = 'Qidirishda xatolik yuz berdi'
